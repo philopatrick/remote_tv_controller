@@ -26,6 +26,12 @@ def send_command():
         os.system(f"adb shell am start -a android.intent.action.VIEW -d {command}")
         time.sleep(3)
         return 'OK'
+    if "TeXt" in command:
+        command = command.replace('TeXt','')
+        command = parse.unquote(command)
+        print(command)
+        os.system(f"adb shell app_process -Djava.class.path=/mnt/sdcard/yadb /data/local/tmp com.ysbing.yadb.Main -keyboard {command}")
+        return 'OK'
     if "ZhIbO" == command:
         os.system("adb shell am start -n com.tcl.tv/com.tcl.tv.TVActivity")
         time.sleep(3)
