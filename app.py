@@ -43,7 +43,12 @@ def send_command():
         return 'OK'
     send_adb_command(command)
     return 'OK'
-
+@app.route('/send_command_refresh', methods=['POST'])
+def send_command_refresh():
+    command = request.form['command']
+    os.system(f"adb shell input {command}")
+    return 'OK'
+    
 if __name__ == '__main__':
     app.run(debug=True, host="::", port="8888")
 

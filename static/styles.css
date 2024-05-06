@@ -41,6 +41,16 @@ img {
     font-size: 1.5em;
 }
 
+.visual {
+    background-color: #32de84;
+    font-size: 1.5em;
+}
+
+.switch {
+    display: flex;
+    align-items: start;
+}
+
 .arrows {
     display: flex;
     flex-direction: column;

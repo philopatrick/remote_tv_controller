@@ -11,8 +11,10 @@
 <body>
     <div class="container">
     <div class="remote-control">
+        <div class="switch">
         <button class="button power" onclick="sendCommand_refresh('keyevent KEYCODE_POWER')">电源</button>
-        <button class="button power" onclick="sendCommand_refresh('keyevent KEYCODE_POWER')">可视</button>
+        <button class="button visual" onclick="keshi=!keshi;">可视</button>
+        </div>
         <img id="refreshimg" src="{{ url_for('static', filename='screenshot.png')}}" alt="screenshot">
         <div class="arrows">
             <button class="button up" onclick="sendCommand_refresh('keyevent KEYCODE_DPAD_UP')">▲</button>
@@ -39,6 +41,7 @@
 </div>
 
 <script>
+    let keshi = false;
         function sendCommand(command) {
             fetch('/send_command', {
                 method: 'POST',
@@ -49,7 +52,8 @@
             });
         }
         function sendCommand_refresh(command) {
-            fetch('/send_command', {
+            if(keshi) {
+                fetch('/send_command_refresh', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
@@ -61,6 +65,10 @@
                 document.getElementById("refreshimg").src="{{ url_for('static', filename='screenshot.png')}}" + '?t=' +  now.getTime();
                 
             });
+            } else {
+                sendCommand(command);
+            }
+            
         }
         function sendText() {
             var text = document.getElementById('text').value;
