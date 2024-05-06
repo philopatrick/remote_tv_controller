@@ -9,7 +9,8 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #f0f0f0; /* 背景色与主页区别开来 */
+    background-color: #f0f0f0;
+    /* 背景色与主页区别开来 */
 }
 
 .remote-control {
@@ -28,6 +29,13 @@ body {
     text-align: center;
 }
 
+img {
+    width: 80%;
+    display: flex;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin: 1em auto
+}
+
 .power {
     background-color: #ff6347;
     font-size: 1.5em;
@@ -44,16 +52,18 @@ body {
     align-items: center;
 }
 
-.bolr .return{
-    position:absolute;
+.bolr .return {
+    position: absolute;
     right: calc(50% - 8em);
 }
 
-.up, .down, .left, .right {
+.up,
+.down,
+.left,
+.right {
     width: 3em;
     height: 3em;
     font-size: 1.4em;
-   
 }
 
 .return {

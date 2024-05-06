@@ -11,17 +11,19 @@
 <body>
     <div class="container">
     <div class="remote-control">
-        <button class="button power" onclick="sendCommand('keyevent KEYCODE_POWER')">电源</button>
+        <button class="button power" onclick="sendCommand_refresh('keyevent KEYCODE_POWER')">电源</button>
+        <button class="button power" onclick="sendCommand_refresh('keyevent KEYCODE_POWER')">可视</button>
+        <img id="refreshimg" src="{{ url_for('static', filename='screenshot.png')}}" alt="screenshot">
         <div class="arrows">
-            <button class="button up" onclick="sendCommand('keyevent KEYCODE_DPAD_UP')">▲</button>
+            <button class="button up" onclick="sendCommand_refresh('keyevent KEYCODE_DPAD_UP')">▲</button>
             <div class="lr">
-                <button class="button left" onclick="sendCommand('keyevent KEYCODE_DPAD_LEFT')">◀</button>
-                <button class="button ok" onclick="sendCommand('keyevent KEYCODE_ENTER')">OK</button>
-                <button class="button right" onclick="sendCommand('keyevent KEYCODE_DPAD_RIGHT')">▶</button>
+                <button class="button left" onclick="sendCommand_refresh('keyevent KEYCODE_DPAD_LEFT')">◀</button>
+                <button class="button ok" onclick="sendCommand_refresh('keyevent KEYCODE_ENTER')">OK</button>
+                <button class="button right" onclick="sendCommand_refresh('keyevent KEYCODE_DPAD_RIGHT')">▶</button>
             </div>
             <div class="bolr">
-            <button class="button down" onclick="sendCommand('keyevent KEYCODE_DPAD_DOWN')">▼</button>
-            <button class="button return" onclick="sendCommand('keyevent KEYCODE_BACK')">⏎</button>
+            <button class="button down" onclick="sendCommand_refresh('keyevent KEYCODE_DPAD_DOWN')">▼</button>
+            <button class="button return" onclick="sendCommand_refresh('keyevent KEYCODE_BACK')">⏎</button>
             </div>
         <div class="lr">
 	<button class="button left" onclick="sendCommand('ZhIbO')">📺</button>
@@ -46,7 +48,20 @@
                 body: 'command=' + encodeURIComponent(command)
             });
         }
-
+        function sendCommand_refresh(command) {
+            fetch('/send_command', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: 'command=' + encodeURIComponent(command)
+            }).then(response => {
+                console.log(response);
+                var now = new Date();
+                document.getElementById("refreshimg").src="{{ url_for('static', filename='screenshot.png')}}" + '?t=' +  now.getTime();
+                
+            });
+        }
         function sendText() {
             var text = document.getElementById('text').value;
             sendCommand('text ' + encodeURIComponent(text));
