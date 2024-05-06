@@ -9,7 +9,7 @@ app = Flask(__name__)
 # Function to send ADB commands
 def send_adb_command(command):
     os.system(f"adb shell input {command}")
-    os.system("adb shell screencap -p  | convert - -quality 1% static/screenshot.png")
+    
 
 # Define routes
 @app.route('/')
@@ -47,6 +47,7 @@ def send_command():
 def send_command_refresh():
     command = request.form['command']
     os.system(f"adb shell input {command}")
+    os.system("adb shell screencap -p  | convert - -quality 1% static/screenshot.png")
     return 'OK'
     
 if __name__ == '__main__':
